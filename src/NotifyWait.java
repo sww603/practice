@@ -10,8 +10,12 @@ public class NotifyWait {
     new Thread(new Runnable() {
       @Override
       public void run() {
-        for (int i = 1; i < 100; i++) {
-          shareDate.add();
+        for (int i = 1; i < 10; i++) {
+          try {
+            shareDate.add();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
     }, "A").start();
@@ -19,8 +23,12 @@ public class NotifyWait {
     new Thread(new Runnable() {
       @Override
       public void run() {
-        for (int i = 1; i < 100; i++) {
-          shareDate.sub();
+        for (int i = 1; i < 10; i++) {
+          try {
+            shareDate.sub();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
     }, "B").start();
@@ -28,18 +36,25 @@ public class NotifyWait {
       @Override
       public void run() {
         for (int i = 1; i < 10; i++) {
-          shareDate.sub();
+          try {
+            shareDate.sub();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
-    }, "c").start();
+    }, "C").start();
     new Thread(new Runnable() {
       @Override
       public void run() {
         for (int i = 1; i < 10; i++) {
-          shareDate.sub();
+          try {
+            shareDate.add();
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
         }
       }
     }, "D").start();
   }
-
 }
